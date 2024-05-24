@@ -1,0 +1,55 @@
+﻿@page
+@using FShop.RazorPage.Infrastructure
+@using FShop.RazorPage.TagHelpers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model FShop.RazorPage.Pages.Admin.Banners.IndexModel
+@{
+    ViewData["title"] = "مدیریت بنرها";
+    ViewData["selected"] = "banners";
+}
+<h3>@ViewData["title"]</h3>
+<a asp-page="Add" class="btn btn-success mb-2">افزودن بنر</a>
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+        <tr>
+            <th>تصویر بنر</th>
+            <th>موقعیت</th>
+            <th>لینک</th>
+            <th>عملیات </th>
+   
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Banners)
+        {
+            <tr>
+                <td class="text-bold-500">
+                    <img src="@Directories.GetBannerImage(@item.ImageName)" style="max-width: 100px"/>
+                </td>
+                <td>@item.Position</td>
+                <td class="text-bold-500">@item.Link</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">ویرایش</a>
+                    @*                    <delete-item url="@Url.Page("Index", "DeleteSlider", new { sliderId = @item.Id })">
+                        حذف
+                    </delete-item>*@
+                    <delete-item url="@Url.Page("Index", "DeleteBanner", new {bannerId = @item.Id})">
+                        حذف
+                    </delete-item>
+                </td>
+            </tr>
+
+        }
+        @if (Model.Banners.Any() == false)
+        {
+            <tr>
+                <td colspan="4" class="text-center">موردی برای نمایش وجود ندارد</td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
+
+

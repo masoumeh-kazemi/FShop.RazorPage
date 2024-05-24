@@ -1,0 +1,28 @@
+﻿@page
+@model FShop.RazorPage.Pages.Auth.LoginModel
+@{
+    Layout = "Shared/Layout/_AuthLayout";
+    ViewData["title"] = "ورود به سایت";
+}
+
+<div class="auth-form shadow-around">
+    <div class="auth-form-title">
+        @ViewData["title"]
+    </div>
+    <form method="post">
+        @Html.EditorFor(m=>m.PhoneNumber)
+        @Html.EditorFor(m=>m.Password)
+
+        <div class="form-element-row text-left">
+            <button class="btn-element btn-info-element">
+                <i class="fad fa-sign-in-alt"></i>
+                ورود به سایت
+            </button>
+        </div>
+
+    </form>
+    <div class="auth-form-footer">
+        <span>کاربر جدید هستید؟</span>
+        <a asp-page="Register" class="link--with-border-bottom">ثبت نام در سایت</a>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@page "{handler?}"
+@using FShop.RazorPage.Infrastructure.Utils
+@using FShop.RazorPage.Infrastructure
+@model FShop.RazorPage.Pages.Admin.Products.IndexModel
+@{
+    ViewData["title"] = "مدیریت محصولات";
+    ViewData["selected"] = "products_product";
+}
+
+<form class="card shadow-lg " method="get">
+    <div class="card-header text-left">
+        <a asp-page="" class="btn btn-danger btn-sm">حذف فیلتر</a>
+        <button type="submit" class="btn btn-primary btn-sm">فیلتر</button>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <label>شناسه محصول</label>
+                <input type="number" asp-for="@Model.FilterParams.Id" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label>عنوان محصول</label>
+                <input type="text" asp-for="@Model.FilterParams.Title" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label>slug</label>
+                <input type="text" asp-for="@Model.FilterParams.Slug" class="form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<h3>@ViewData["title"]</h3>
+<a asp-page="Add" class="btn btn-success mb-2">
+    <i class="fa fa-plus"></i>
+    افزودن محصول
+</a>
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+        <tr>
+            <th>تصویر محصول</th>
+            <th>عنوان</th>
+            <th>slug</th>
+            <th>تاریخ ثبت</th>
+            <th>عملیات</th>
+   
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.FilterResult.Data)
+            {
+                <tr>
+                    <td class="text-bold-500">
+                        <img src="@Directories.GetProductImage(item.ImageName)" width="250px"/>
+                    </td>
+                    <td>@item.Title</td>
+                    <td class="text-bold-500">@item.Slug</td>
+                    <td>@item.CreationDate.ToPersianDate()</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">ویرایش</a>
+
+                        <delete-item url="@Url.Page("Index","DeleteProduct",new{id = @item.Id})">
+                            حذف
+                        </delete-item>
+                        <a asp-page="Galleries/Index" asp-route-productId="@item.Id" class="btn btn-warning btn-sm">گالری تصاویر</a>
+
+                    </td>
+                </tr>
+
+            }
+
+        
+        @if (Model.FilterResult.Data.Any() == false)
+        {
+            <tr>
+                <td colspan="4" class="text-center">موردی برای نمایش وجود ندارد</td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
+

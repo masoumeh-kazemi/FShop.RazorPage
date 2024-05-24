@@ -1,0 +1,81 @@
+﻿@page
+@model FShop.RazorPage.Pages.Admin.Categories.IndexModel
+@{
+    ViewData["title"] = "مدیریت دسته بندی ها";
+    ViewData["selected"] = "products_categories";
+}
+<h3>@ViewData["title"]</h3>
+<a asp-page="Add" class="btn btn-success mb-2">افزودن دسته بندی</a>
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <td>عنوان</td>
+                <td>Slug</td>
+                <td>عملیات</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Slug</td>
+                    <td>
+                        <a class="btn btn-primary" asp-page="Edit" asp-route-id="@item.Id">ویرایش</a>
+                        <a class="btn btn-success" asp-page="Add" asp-route-parentId="@item.Id">افزودن زیردسته</a>
+                        <delete-item url="@Url.Page("Index", "DeleteItem", new { categoryId = @item.Id })">
+                            حذف
+                        </delete-item>
+                    </td>
+                </tr>
+
+                @if (item.Childs.Any())
+                {
+                    @foreach (var child in item.Childs.Where(f => f.ParentId == item.Id))
+                    {
+                        {
+                            <tr style="background-color: antiquewhite">
+                                <td>
+                                    @child.Title
+                                </td>
+                                <td>@child.Slug</td>
+                                <td>
+                                    <a class="btn btn-primary" asp-page="Edit" asp-route-id="@child.Id">ویرایش</a>
+                                    <a class="btn btn-success" asp-page="Add" asp-route-parentId="@child.Id">افزودن زیردسته</a>
+                                    <delete-item url="@Url.Page("Index", "DeleteItem", new { categoryId = @child.Id })">
+                                        حذف
+                                    </delete-item>
+                                </td>
+                            </tr>
+                        }
+
+
+                        @if (child.Childs.Any())
+                        {
+                            @foreach (var secondChild in child.Childs)
+                            {
+                                <tr style="background-color: burlywood">
+                                    <td>
+                                        @secondChild.Title
+                                    </td>
+                                    <td>@child.Slug</td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-page="Edit" asp-route-id="@secondChild.Id">ویرایش</a>
+                                        <delete-item url="@Url.Page("Index", "DeleteItem", new { categoryId = @secondChild.Id })">
+                                            حذف
+                                        </delete-item>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>

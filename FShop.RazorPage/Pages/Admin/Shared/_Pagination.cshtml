@@ -1,0 +1,68 @@
+﻿@model FShop.RazorPage.Models.BaseFilter
+@*<ul class="pagination">
+    @if (Model.CurrentPage > 1)
+    {
+        <li class="page-item previous disabled" id="DataTables_Table_0_previous">
+            <a href="#" onclick="changePageId('@(Model.CurrentPage - 1)')" class="page-link">قبلی</a>
+        </li>
+    }
+
+
+    @for (var i = Model.StartPage; i <= Model.EndPage; i++)
+    {
+        <li class="page-item @(i == Model.CurrentPage ? "active" : null) ">
+            <a href="#" onclick="changePageId('@i')" class="page-link">@i</a>
+        </li>
+    }
+    @if (Model.CurrentPage < Model.PageCount)
+    {
+        <li class="page-item next" id="DataTables_Table_0_next">
+            <a href="#" onclick="changePageId('@(Model.CurrentPage + 1)')" class="page-link">بعدی</a>
+        </li>
+
+    }
+</ul>*@
+
+<ul class="pagination">
+    @if (Model.CurrentPage > 1)
+    {
+        <li class=" page-item previous">
+            <a href="#" onclick="changePageId('@(Model.CurrentPage-1)')" class="page-link">قبلی</a>
+        </li>
+    }
+    @for (var i = Model.StartPage; i <= Model.EndPage; i++)
+    {
+        <li class="page-item @(i==Model.CurrentPage?"active":null)">
+            <a href="#" onclick="changePageId('@i')" class="page-link">@i</a>
+        </li>
+    }
+    @if (Model.CurrentPage < Model.PageCount)
+    {
+        <li class="page-item next">
+            <a href="#" onclick="changePageId('@(Model.CurrentPage+1)')" class="page-link">بعدی</a>
+        </li>
+    }
+</ul>
+
+@section Scripts
+{
+    <script>
+    function changePageId(pageId) {
+    var url = new URL(window.location.href);
+    var search_params = url.searchParams;
+    search_params.set('filterParams.pageId', pageId);
+    url.search = search_params.toString();
+    var new_url = url.toString();
+    window.location.replace(new_url);
+}
+    </script>
+}
+
+@*function changePageId(pageId) {
+var url = new URL(window.location.href);
+var search_params = url.searchParams;
+search_params.set('filterParams.pageId', pageId);
+url.search = search_params.toString();
+var new_url = url.toString();
+window.location.replace(new_url);
+}*@

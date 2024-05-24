@@ -1,0 +1,38 @@
+﻿@page
+@using FShop.RazorPage.Infrastructure
+@using FShop.RazorPage.Models.Sellers
+@model FShop.RazorPage.Pages.SellerPanel.IndexModel
+@{
+    ViewData["title"] = "داشبورد";
+    ViewData["selected"] = "index";
+
+}
+
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>نام فروشگاه</th>
+                <th>وضعیت</th>
+                <th>شماره کاربری</th>
+                <th>کد ملی</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+                <td>@Model.Seller.ShopName</td>
+
+                <td>@Model.Seller.Status</td>
+
+                <td>@Model.Seller.UserId</td>
+                <td>@Model.Seller.NationalCode</td>
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+

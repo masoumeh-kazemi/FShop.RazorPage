@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\CookieUtiles\" />
+    <Folder Include="Models\Banners\" />
+    <Folder Include="Models\Categories\" />
+    <Folder Include="Models\ShippingMethods\" />
+    <Folder Include="Models\Sliders\" />
+    <Folder Include="Services\Auth\" />
+    <Folder Include="Services\Banners\" />
+    <Folder Include="Services\Categories\" />
+    <Folder Include="Services\Comments\" />
+    <Folder Include="Services\MainPage\" />
+    <Folder Include="Services\Transactions\" />
+    <Folder Include="Services\ShippingMethods\" />
+    <Folder Include="Services\Roles\" />
+    <Folder Include="Services\Sellers\" />
+    <Folder Include="Services\Products\" />
+    <Folder Include="Services\Users\" />
+    <Folder Include="Services\Sliders\" />
+    <Folder Include="ViewModels\Users\Addresses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="CookieManager" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.28" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+  </ItemGroup>
+
+</Project>

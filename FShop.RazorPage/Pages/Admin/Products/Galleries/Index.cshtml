@@ -1,0 +1,62 @@
+﻿@page "{productId}"
+@using FShop.RazorPage.Infrastructure
+@model FShop.RazorPage.Pages.Admin.Products.Galleries.IndexModel
+@{
+    ViewData["Title"] = "مدیرت تصاویر";
+    ViewData["selected"] = "products_product";
+}
+<h3>@ViewData["title"]</h3>
+<a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-success mb-2">افزودن عکس</a>
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+        <tr>
+            <td>عکس</td>
+            <td>ترتیب نمایش</td>
+            <td>عملیات</td>
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Images.OrderByDescending(f=>f.Sequence))
+        {
+            <tr>
+                <td>
+                        <img src="@Directories.GetProductImageGallery(@item.ImageName)" />
+                </td>
+                <td>@item.Sequence</td>
+                <td>
+                    <delete-item url="@Url.Page("Index","DeleteImageProduct", new {id = @item.Id})">حذف</delete-item>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <form method="post" data-ajax="true" enctype="multipart/form-data" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">افزودن عکس</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.EditorFor(f=>f.ImageFile)
+                    </div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(f=>f.Sequence)
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                <button type="submit" class="btn btn-success">ذخیره اطلاعات</button>
+            </div>
+        </form>
+    </div>
+</div>

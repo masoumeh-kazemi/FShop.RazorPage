@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model FShop.RazorPage.Models.Sellers.Command.EditSellerInventoryCommand
+<form method="post"  asp-page="Index" data-ajax="true">
+    @Html.HiddenFor(f=>f.InventoryId)
+    @Html.HiddenFor(f=>f.SellerId)
+    <div class="row ">
+        <div class="col-md-6">
+            @Html.EditorFor(f => f.Price)
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(f => f.Count)
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(f => f.DiscountPercentage)
+        </div>
+    </div>
+    <div class="card-footer text-left">
+        <submit/>
+    </div>
+</form>

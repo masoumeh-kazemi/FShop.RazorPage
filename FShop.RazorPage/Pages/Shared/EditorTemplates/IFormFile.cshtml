@@ -1,0 +1,9 @@
+﻿@model Microsoft.AspNetCore.Http.IFormFile
+<div class="form-element-row">
+    <label class="label-element" asp-for="@Model"></label>
+    <div class="form-element-with-icon">
+        <input type="file" asp-for="@Model" class="input-element">
+        <i class="fad fa-key-skeleton"></i>
+    </div>
+    <span asp-validation-for="@Model"></span>
+</div>
